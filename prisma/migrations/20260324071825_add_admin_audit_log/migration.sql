@@ -1,0 +1,8 @@
+-- CreateTable
+CREATE TABLE "AdminAuditLog" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "action" TEXT NOT NULL,
+    "resourceId" TEXT NOT NULL,
+    "detail" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

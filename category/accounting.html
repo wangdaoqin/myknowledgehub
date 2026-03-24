@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会计知识教程 | 知海导航</title>
+  <style>
+    :root {
+      --background: #070b12;
+      --foreground: #f4f7fb;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #81cfe0;
+      margin-bottom: 8px;
+    }
+    
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 8px 0 12px 0;
+    }
+    
+    .description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #a1a1aa;
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    
+    .nav-link {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      transform: translateY(-2px);
+    }
+    
+    .category-header {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .category-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    
+    .category-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    
+    .category-description {
+      font-size: 16px;
+      color: #a1a1aa;
+      margin-bottom: 20px;
+    }
+    
+    .resource-count {
+      font-size: 14px;
+      color: #81cfe0;
+    }
+    
+    .search-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 16px;
+    }
+    
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    .search-box {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: var(--foreground);
+      font-size: 14px;
+    }
+    
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    
+    .resource-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.2s ease;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(129, 207, 224, 0.4);
+    }
+    
+    .resource-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .resource-description {
+      font-size: 14px;
+      color: #a1a1aa;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    
+    .resource-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    
+    .resource-tag {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: rgba(129, 207, 224, 0.1);
+      color: #81cfe0;
+      border: 1px solid rgba(129, 207, 224, 0.2);
+    }
+    
+    .resource-link {
+      display: inline-block;
+      font-size: 14px;
+      color: #81cfe0;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .resource-link:hover {
+      color: #4ecdc4;
+    }
+    
+    footer {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      font-size: 14px;
+      color: #a1a1aa;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">KnowledgeHub</div>
+      <h1>知海导航</h1>
+      <p class="description">你的个人知识门户，聚焦编程、统计、AI 与财会。每一条资源都可搜索、可筛选、可持续维护。</p>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          首页
+        </a>
+        <a href="programming.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          💻 编程语言
+        </a>
+        <a href="statistics.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📊 统计分析
+        </a>
+        <a href="ai.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          🤖 AI 工具教程
+        </a>
+        <a href="accounting.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📒 会计知识教程
+        </a>
+        <a href="../about.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          关于本站
+        </a>
+      </div>
+    </header>
+    
+    <div class="category-header">
+      <div class="category-icon">📒</div>
+      <h2 class="category-title">会计知识教程</h2>
+      <p class="category-description">认证备考、税法更新与财经资讯，从基础会计到高级财务管理的全面覆盖。</p>
+      <div class="resource-count">共 20+ 资源</div>
+    </div>
+    
+    <div class="search-section">
+      <div class="section-header">
+        <h2>资源搜索</h2>
+      </div>
+      <input type="text" class="search-box" placeholder="搜索会计知识相关资源...">
+    </div>
+    
+    <div class="resources-grid">
+      <div class="resource-card">
+        <h3 class="resource-title">基础会计原理</h3>
+        <p class="resource-description">学习会计的基本原理和方法，包括会计等式、借贷记账法和财务报表等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">基础会计</span>
+          <span class="resource-tag">会计原理</span>
+          <span class="resource-tag">入门</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">税法更新解读</h3>
+        <p class="resource-description">了解最新的税法政策和法规更新，包括企业所得税、个人所得税和增值税等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">税法</span>
+          <span class="resource-tag">政策更新</span>
+          <span class="resource-tag">解读</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">财务报表分析</h3>
+        <p class="resource-description">学习如何分析财务报表，包括资产负债表、利润表和现金流量表等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">财务分析</span>
+          <span class="resource-tag">报表分析</span>
+          <span class="resource-tag">财务管理</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">CPA 考试备考指南</h3>
+        <p class="resource-description">学习如何备考 CPA 考试，包括考试科目、备考策略和复习方法等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">CPA</span>
+          <span class="resource-tag">考试备考</span>
+          <span class="resource-tag">认证</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">管理会计实务</h3>
+        <p class="resource-description">学习管理会计的基本原理和方法，包括成本核算、预算管理和绩效评估等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">管理会计</span>
+          <span class="resource-tag">成本核算</span>
+          <span class="resource-tag">预算管理</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">财经资讯解读</h3>
+        <p class="resource-description">了解最新的财经资讯和市场动态，包括宏观经济、行业发展和投资趋势等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">财经资讯</span>
+          <span class="resource-tag">市场动态</span>
+          <span class="resource-tag">投资</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+    </div>
+    
+    <footer>
+      <p>由你维护的个人学习指挥中心，支持每日增量更新。</p>
+      <p>建议下一步: 连接 GitHub + Vercel 自动部署，并持续补充每个分类 20-30 条资源。</p>
+      <p>可选扩展: 好友登录、收藏夹、RSS 自动抓取、学习进度追踪看板。</p>
+    </footer>
+  </div>
+</body>
+</html>

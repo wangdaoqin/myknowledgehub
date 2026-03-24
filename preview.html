@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知海导航 | KnowledgeHub</title>
+  <style>
+    :root {
+      --background: #070b12;
+      --foreground: #f4f7fb;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #81cfe0;
+      margin-bottom: 8px;
+    }
+    
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 8px 0 12px 0;
+    }
+    
+    .description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #a1a1aa;
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .nav-link {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      transform: translateY(-2px);
+    }
+    
+    .category-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    
+    .category-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(129, 207, 224, 0.4);
+    }
+    
+    .category-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    
+    .category-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .category-description {
+      font-size: 14px;
+      color: #a1a1aa;
+    }
+    
+    .search-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 16px;
+    }
+    
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    .resource-count {
+      font-size: 14px;
+      color: #a1a1aa;
+    }
+    
+    .search-box {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: var(--foreground);
+      font-size: 14px;
+    }
+    
+    .resource-sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    
+    .resource-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .resource-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+    }
+    
+    .resource-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    
+    .resource-info {
+      font-size: 12px;
+      color: #a1a1aa;
+    }
+    
+    footer {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      font-size: 14px;
+      color: #a1a1aa;
+      line-height: 1.5;
+    }
+    
+    @media (max-width: 768px) {
+      .resource-sections {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">KnowledgeHub</div>
+      <h1>知海导航</h1>
+      <p class="description">你的个人知识门户，聚焦编程、统计、AI 与财会。每一条资源都可搜索、可筛选、可持续维护。</p>
+      <div class="nav-links">
+        <a href="#" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          💻 编程语言
+        </a>
+        <a href="#" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📊 统计分析
+        </a>
+        <a href="#" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          🤖 AI 工具教程
+        </a>
+        <a href="#" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📒 会计知识教程
+        </a>
+        <a href="#" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          关于本站
+        </a>
+        <a href="#" class="nav-link" style="border: 1px solid rgba(110, 231, 183, 0.3); background: rgba(110, 231, 183, 0.1); color: #6ee7b7;">
+          管理后台
+        </a>
+        <a href="#" class="nav-link" style="border: 1px solid rgba(196, 181, 253, 0.3); background: rgba(196, 181, 253, 0.1); color: #c4b5fd;">
+          学习看板
+        </a>
+        <a href="#" class="nav-link" style="border: 1px solid rgba(96, 165, 250, 0.3); background: rgba(96, 165, 250, 0.1); color: #60a5fa;">
+          RSS更新
+        </a>
+        <a href="#" class="nav-link" style="border: 1px solid rgba(252, 211, 77, 0.3); background: rgba(252, 211, 77, 0.1); color: #fcd34d;">
+          好友专区
+        </a>
+      </div>
+    </header>
+    
+    <div class="category-links">
+      <a href="#" class="category-card">
+        <div class="category-icon">💻</div>
+        <div class="category-name">编程语言</div>
+        <div class="category-description">Python / R / JavaScript 多维学习路径</div>
+      </a>
+      <a href="#" class="category-card">
+        <div class="category-icon">📊</div>
+        <div class="category-name">统计分析</div>
+        <div class="category-description">理论统计与应用统计双轨并行</div>
+      </a>
+      <a href="#" class="category-card">
+        <div class="category-icon">🤖</div>
+        <div class="category-name">AI 工具教程</div>
+        <div class="category-description">AI 编程助手与大模型应用实践</div>
+      </a>
+      <a href="#" class="category-card">
+        <div class="category-icon">📒</div>
+        <div class="category-name">会计知识教程</div>
+        <div class="category-description">认证备考、税法更新与财经资讯</div>
+      </a>
+    </div>
+    
+    <div class="search-section">
+      <div class="section-header">
+        <h2>全局搜索与标签筛选</h2>
+        <div class="resource-count">总资源数: 100+</div>
+      </div>
+      <input type="text" class="search-box" placeholder="搜索资源...">
+    </div>
+    
+    <div class="resource-sections">
+      <div class="resource-section">
+        <h3>今日推荐</h3>
+        <div class="resource-item">
+          <div class="resource-title">Python 数据分析入门教程</div>
+          <div class="resource-info">全面介绍 Python 在数据分析中的应用</div>
+        </div>
+        <div class="resource-item">
+          <div class="resource-title">R 语言统计建模实战</div>
+          <div class="resource-info">从基础到高级的统计建模技巧</div>
+        </div>
+        <div class="resource-item">
+          <div class="resource-title">AI 大模型应用开发指南</div>
+          <div class="resource-info">如何构建基于大模型的应用</div>
+        </div>
+      </div>
+      <div class="resource-section">
+        <h3>最近更新</h3>
+        <div class="resource-item">
+          <div class="resource-title">2026 年最新税法解读</div>
+          <div class="resource-info">验证时间: 2026-03-24</div>
+        </div>
+        <div class="resource-item">
+          <div class="resource-title">JavaScript ES2026 新特性</div>
+          <div class="resource-info">验证时间: 2026-03-23</div>
+        </div>
+        <div class="resource-item">
+          <div class="resource-title">AI 辅助编程工具对比</div>
+          <div class="resource-info">验证时间: 2026-03-22</div>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p>由你维护的个人学习指挥中心，支持每日增量更新。</p>
+      <p>建议下一步: 连接 GitHub + Vercel 自动部署，并持续补充每个分类 20-30 条资源。</p>
+      <p>可选扩展: 好友登录、收藏夹、RSS 自动抓取、学习进度追踪看板。</p>
+    </footer>
+  </div>
+</body>
+</html>

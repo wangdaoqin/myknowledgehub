@@ -1,0 +1,20 @@
+[
+  {
+    "id": "openai-blog",
+    "name": "OpenAI Blog",
+    "url": "https://openai.com/blog/rss.xml",
+    "category": "ai"
+  },
+  {
+    "id": "anthropic-news",
+    "name": "Anthropic News",
+    "url": "https://www.anthropic.com/news/rss.xml",
+    "category": "ai"
+  },
+  {
+    "id": "vercel-blog",
+    "name": "Vercel Blog",
+    "url": "https://vercel.com/atom.xml",
+    "category": "programming"
+  }
+]

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>好友专区 | 知海导航</title>
+  <style>
+    :root {
+      --background: #070b12;
+      --foreground: #f4f7fb;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --primary-color: #81cfe0;
+      --success-color: #6ee7b7;
+      --warning-color: #fcd34d;
+      --danger-color: #f87171;
+      --amber-color: #fcd34d;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #81cfe0;
+      margin-bottom: 8px;
+    }
+    
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 8px 0 12px 0;
+    }
+    
+    .description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #a1a1aa;
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    
+    .nav-link {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      transform: translateY(-2px);
+    }
+    
+    .friends-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    
+    .friends-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--amber-color);
+    }
+    
+    .login-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .login-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--amber-color);
+    }
+    
+    .login-description {
+      font-size: 14px;
+      color: #a1a1aa;
+      margin-bottom: 24px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .button-primary {
+      background: var(--amber-color);
+      color: var(--background);
+    }
+    
+    .button-primary:hover {
+      background: #fbbf24;
+    }
+    
+    .button-secondary {
+      background: rgba(252, 211, 77, 0.1);
+      color: var(--amber-color);
+      border: 1px solid rgba(252, 211, 77, 0.2);
+    }
+    
+    .button-secondary:hover {
+      background: rgba(252, 211, 77, 0.2);
+    }
+    
+    .friends-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .friend-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.2s ease;
+    }
+    
+    .friend-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(252, 211, 77, 0.4);
+    }
+    
+    .friend-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .friend-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--amber-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--background);
+    }
+    
+    .friend-info {
+      flex: 1;
+    }
+    
+    .friend-name {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .friend-status {
+      font-size: 12px;
+      color: #a1a1aa;
+    }
+    
+    .friend-content {
+      font-size: 14px;
+      color: #a1a1aa;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    
+    .friend-resources {
+      margin-top: 16px;
+    }
+    
+    .resource-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .resource-icon {
+      font-size: 16px;
+    }
+    
+    .resource-title {
+      flex: 1;
+      font-size: 14px;
+    }
+    
+    .resource-date {
+      font-size: 12px;
+      color: #71717a;
+    }
+    
+    .shared-resources {
+      margin-top: 48px;
+    }
+    
+    .shared-resources-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--amber-color);
+    }
+    
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    
+    .resource-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.2s ease;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(252, 211, 77, 0.4);
+    }
+    
+    .resource-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    
+    .resource-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .resource-card-source {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: rgba(252, 211, 77, 0.1);
+      color: var(--amber-color);
+      border: 1px solid rgba(252, 211, 77, 0.2);
+    }
+    
+    .resource-card-content {
+      font-size: 14px;
+      color: #a1a1aa;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    
+    .resource-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #71717a;
+    }
+    
+    .resource-card-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .user-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--amber-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--background);
+    }
+    
+    @media (max-width: 768px) {
+      .friends-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      
+      .friends-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .resources-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">KnowledgeHub</div>
+      <h1>知海导航</h1>
+      <p class="description">你的个人知识门户，聚焦编程、统计、AI 与财会。每一条资源都可搜索、可筛选、可持续维护。</p>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          首页
+        </a>
+        <a href="category/programming.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          💻 编程语言
+        </a>
+        <a href="category/statistics.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📊 统计分析
+        </a>
+        <a href="category/ai.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          🤖 AI 工具教程
+        </a>
+        <a href="category/accounting.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📒 会计知识教程
+        </a>
+        <a href="about.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          关于本站
+        </a>
+      </div>
+    </header>
+    
+    <div class="friends-header">
+      <h2 class="friends-title">好友专区</h2>
+      <div>
+        <a href="#" class="button button-primary">邀请好友</a>
+      </div>
+    </div>
+    
+    <div class="login-section">
+      <h3 class="login-title">登录以访问好友功能</h3>
+      <p class="login-description">登录后，你可以查看好友分享的资源、分享自己的资源给好友，以及与好友互动交流。</p>
+      <a href="#" class="button button-primary">登录 / 注册</a>
+    </div>
+    
+    <div class="friends-grid">
+      <div class="friend-card">
+        <div class="friend-header">
+          <div class="friend-avatar">A</div>
+          <div class="friend-info">
+            <div class="friend-name">Alice</div>
+            <div class="friend-status">在线</div>
+          </div>
+        </div>
+        <div class="friend-content">
+          <p>最近分享了一些关于 AI 工具的学习资源，欢迎查看！</p>
+        </div>
+        <div class="friend-resources">
+          <div class="resource-item">
+            <span class="resource-icon">🤖</span>
+            <span class="resource-title">ChatGPT 应用指南</span>
+            <span class="resource-date">2026-03-24</span>
+          </div>
+          <div class="resource-item">
+            <span class="resource-icon">🤖</span>
+            <span class="resource-title">AI 大模型开发入门</span>
+            <span class="resource-date">2026-03-23</span>
+          </div>
+        </div>
+      </div>
+      <div class="friend-card">
+        <div class="friend-header">
+          <div class="friend-avatar">B</div>
+          <div class="friend-info">
+            <div class="friend-name">Bob</div>
+            <div class="friend-status">离线</div>
+          </div>
+        </div>
+        <div class="friend-content">
+          <p>分享了一些编程相关的学习资料，希望对你有帮助！</p>
+        </div>
+        <div class="friend-resources">
+          <div class="resource-item">
+            <span class="resource-icon">💻</span>
+            <span class="resource-title">Python 数据分析入门</span>
+            <span class="resource-date">2026-03-22</span>
+          </div>
+          <div class="resource-item">
+            <span class="resource-icon">💻</span>
+            <span class="resource-title">JavaScript ES2026 新特性</span>
+            <span class="resource-date">2026-03-21</span>
+          </div>
+        </div>
+      </div>
+      <div class="friend-card">
+        <div class="friend-header">
+          <div class="friend-avatar">C</div>
+          <div class="friend-info">
+            <div class="friend-name">Carol</div>
+            <div class="friend-status">在线</div>
+          </div>
+        </div>
+        <div class="friend-content">
+          <p>最近在学习统计分析，分享了一些相关资源。</p>
+        </div>
+        <div class="friend-resources">
+          <div class="resource-item">
+            <span class="resource-icon">📊</span>
+            <span class="resource-title">统计分析基础</span>
+            <span class="resource-date">2026-03-20</span>
+          </div>
+          <div class="resource-item">
+            <span class="resource-icon">📊</span>
+            <span class="resource-title">数据可视化技术</span>
+            <span class="resource-date">2026-03-19</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="shared-resources">
+      <h3 class="shared-resources-title">好友共享资源</h3>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <div class="resource-card-header">
+            <h4 class="resource-card-title">AI 辅助编程工具对比</h4>
+            <span class="resource-card-source">AI 工具</span>
+          </div>
+          <div class="resource-card-content">
+            对比了当前流行的 AI 辅助编程工具，包括 GitHub Copilot、ChatGPT Code Interpreter 等，分析了它们的优缺点和适用场景。
+          </div>
+          <div class="resource-card-footer">
+            <div class="resource-card-user">
+              <div class="user-avatar">A</div>
+              <span>Alice</span>
+            </div>
+            <span>2026-03-24</span>
+          </div>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-header">
+            <h4 class="resource-card-title">Python 性能优化技巧</h4>
+            <span class="resource-card-source">编程语言</span>
+          </div>
+          <div class="resource-card-content">
+            分享了 Python 代码性能优化的各种技巧，包括算法优化、内存管理、并行计算等方面的内容。
+          </div>
+          <div class="resource-card-footer">
+            <div class="resource-card-user">
+              <div class="user-avatar">B</div>
+              <span>Bob</span>
+            </div>
+            <span>2026-03-23</span>
+          </div>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-header">
+            <h4 class="resource-card-title">统计分析在商业中的应用</h4>
+            <span class="resource-card-source">统计分析</span>
+          </div>
+          <div class="resource-card-content">
+            介绍了如何使用统计分析方法解决商业问题，包括市场分析、客户行为分析、预测建模等方面的应用。
+          </div>
+          <div class="resource-card-footer">
+            <div class="resource-card-user">
+              <div class="user-avatar">C</div>
+              <span>Carol</span>
+            </div>
+            <span>2026-03-22</span>
+          </div>
+        </div>
+        <div class="resource-card">
+          <div class="resource-card-header">
+            <h4 class="resource-card-title">2026 年税法更新解读</h4>
+            <span class="resource-card-source">会计知识</span>
+          </div>
+          <div class="resource-card-content">
+            详细解读了 2026 年税法的重要更新，包括个人所得税、企业所得税和增值税的调整，以及对纳税人的影响。
+          </div>
+          <div class="resource-card-footer">
+            <div class="resource-card-user">
+              <div class="user-avatar">A</div>
+              <span>Alice</span>
+            </div>
+            <span>2026-03-21</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>统计分析 | 知海导航</title>
+  <style>
+    :root {
+      --background: #070b12;
+      --foreground: #f4f7fb;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #81cfe0;
+      margin-bottom: 8px;
+    }
+    
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 8px 0 12px 0;
+    }
+    
+    .description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #a1a1aa;
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    
+    .nav-link {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      transform: translateY(-2px);
+    }
+    
+    .category-header {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .category-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    
+    .category-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    
+    .category-description {
+      font-size: 16px;
+      color: #a1a1aa;
+      margin-bottom: 20px;
+    }
+    
+    .resource-count {
+      font-size: 14px;
+      color: #81cfe0;
+    }
+    
+    .search-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 16px;
+    }
+    
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    .search-box {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: var(--foreground);
+      font-size: 14px;
+    }
+    
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    
+    .resource-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.2s ease;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(129, 207, 224, 0.4);
+    }
+    
+    .resource-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .resource-description {
+      font-size: 14px;
+      color: #a1a1aa;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    
+    .resource-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    
+    .resource-tag {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: rgba(129, 207, 224, 0.1);
+      color: #81cfe0;
+      border: 1px solid rgba(129, 207, 224, 0.2);
+    }
+    
+    .resource-link {
+      display: inline-block;
+      font-size: 14px;
+      color: #81cfe0;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .resource-link:hover {
+      color: #4ecdc4;
+    }
+    
+    footer {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      font-size: 14px;
+      color: #a1a1aa;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">KnowledgeHub</div>
+      <h1>知海导航</h1>
+      <p class="description">你的个人知识门户，聚焦编程、统计、AI 与财会。每一条资源都可搜索、可筛选、可持续维护。</p>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          首页
+        </a>
+        <a href="programming.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          💻 编程语言
+        </a>
+        <a href="statistics.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📊 统计分析
+        </a>
+        <a href="ai.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          🤖 AI 工具教程
+        </a>
+        <a href="accounting.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📒 会计知识教程
+        </a>
+        <a href="../about.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          关于本站
+        </a>
+      </div>
+    </header>
+    
+    <div class="category-header">
+      <div class="category-icon">📊</div>
+      <h2 class="category-title">统计分析</h2>
+      <p class="category-description">理论统计与应用统计双轨并行，从基础概念到高级分析方法的全面覆盖。</p>
+      <div class="resource-count">共 25+ 资源</div>
+    </div>
+    
+    <div class="search-section">
+      <div class="section-header">
+        <h2>资源搜索</h2>
+      </div>
+      <input type="text" class="search-box" placeholder="搜索统计分析相关资源...">
+    </div>
+    
+    <div class="resources-grid">
+      <div class="resource-card">
+        <h3 class="resource-title">统计学基础</h3>
+        <p class="resource-description">学习统计学的基本概念和方法，包括描述统计、概率分布和假设检验等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">统计学</span>
+          <span class="resource-tag">基础</span>
+          <span class="resource-tag">入门</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">回归分析实战</h3>
+        <p class="resource-description">深入学习回归分析方法，包括线性回归、多元回归和逻辑回归等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">回归分析</span>
+          <span class="resource-tag">统计方法</span>
+          <span class="resource-tag">数据分析</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">时间序列分析</h3>
+        <p class="resource-description">学习时间序列分析方法，包括平稳性检验、ARIMA 模型和预测等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">时间序列</span>
+          <span class="resource-tag">预测</span>
+          <span class="resource-tag">数据分析</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">实验设计与分析</h3>
+        <p class="resource-description">学习实验设计的基本原理和方法，包括方差分析、正交设计和响应面方法等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">实验设计</span>
+          <span class="resource-tag">方差分析</span>
+          <span class="resource-tag">统计方法</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">贝叶斯统计入门</h3>
+        <p class="resource-description">学习贝叶斯统计的基本概念和方法，包括先验分布、后验分布和马尔可夫链蒙特卡洛方法等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">贝叶斯统计</span>
+          <span class="resource-tag">概率</span>
+          <span class="resource-tag">统计方法</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+      
+      <div class="resource-card">
+        <h3 class="resource-title">数据可视化技术</h3>
+        <p class="resource-description">学习数据可视化的基本原理和方法，包括图表类型选择、色彩搭配和交互式可视化等内容。</p>
+        <div class="resource-meta">
+          <span class="resource-tag">数据可视化</span>
+          <span class="resource-tag">图表</span>
+          <span class="resource-tag">数据分析</span>
+        </div>
+        <a href="#" class="resource-link">查看资源 →</a>
+      </div>
+    </div>
+    
+    <footer>
+      <p>由你维护的个人学习指挥中心，支持每日增量更新。</p>
+      <p>建议下一步: 连接 GitHub + Vercel 自动部署，并持续补充每个分类 20-30 条资源。</p>
+      <p>可选扩展: 好友登录、收藏夹、RSS 自动抓取、学习进度追踪看板。</p>
+    </footer>
+  </div>
+</body>
+</html>

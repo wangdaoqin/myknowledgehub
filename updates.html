@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSS更新 | 知海导航</title>
+  <style>
+    :root {
+      --background: #070b12;
+      --foreground: #f4f7fb;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --primary-color: #81cfe0;
+      --success-color: #6ee7b7;
+      --warning-color: #fcd34d;
+      --danger-color: #f87171;
+      --sky-color: #60a5fa;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #81cfe0;
+      margin-bottom: 8px;
+    }
+    
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 8px 0 12px 0;
+    }
+    
+    .description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #a1a1aa;
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    
+    .nav-link {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      transform: translateY(-2px);
+    }
+    
+    .updates-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    
+    .updates-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--sky-color);
+    }
+    
+    .filter-section {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    
+    .filter-button {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(96, 165, 250, 0.1);
+      color: var(--sky-color);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .filter-button:hover,
+    .filter-button.active {
+      background: var(--sky-color);
+      color: var(--background);
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      transition: all 0.2s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(96, 165, 250, 0.4);
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .card-source {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: rgba(96, 165, 250, 0.1);
+      color: var(--sky-color);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+    
+    .card-content {
+      font-size: 14px;
+      color: #a1a1aa;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #71717a;
+    }
+    
+    .card-date {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .card-link {
+      color: var(--sky-color);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .card-link:hover {
+      color: #3b82f6;
+    }
+    
+    .rss-sources {
+      margin-top: 48px;
+    }
+    
+    .rss-sources-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--sky-color);
+    }
+    
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    
+    .source-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.2s ease;
+    }
+    
+    .source-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(96, 165, 250, 0.4);
+    }
+    
+    .source-name {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .source-url {
+      font-size: 12px;
+      color: var(--sky-color);
+      text-decoration: none;
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .source-url:hover {
+      color: #3b82f6;
+    }
+    
+    .source-description {
+      font-size: 12px;
+      color: #a1a1aa;
+      line-height: 1.4;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 40px;
+    }
+    
+    .page-button {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: var(--card-bg);
+      color: var(--foreground);
+      border: 1px solid var(--border-color);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .page-button:hover,
+    .page-button.active {
+      background: var(--sky-color);
+      color: var(--background);
+      border-color: var(--sky-color);
+    }
+    
+    @media (max-width: 768px) {
+      .updates-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      
+      .filter-section {
+        flex-wrap: wrap;
+      }
+      
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">KnowledgeHub</div>
+      <h1>知海导航</h1>
+      <p class="description">你的个人知识门户，聚焦编程、统计、AI 与财会。每一条资源都可搜索、可筛选、可持续维护。</p>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          首页
+        </a>
+        <a href="category/programming.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          💻 编程语言
+        </a>
+        <a href="category/statistics.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📊 统计分析
+        </a>
+        <a href="category/ai.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          🤖 AI 工具教程
+        </a>
+        <a href="category/accounting.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📒 会计知识教程
+        </a>
+        <a href="about.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          关于本站
+        </a>
+      </div>
+    </header>
+    
+    <div class="updates-header">
+      <h2 class="updates-title">RSS 更新</h2>
+      <div class="filter-section">
+        <a href="#" class="filter-button active">全部</a>
+        <a href="#" class="filter-button">编程语言</a>
+        <a href="#" class="filter-button">统计分析</a>
+        <a href="#" class="filter-button">AI 工具</a>
+        <a href="#" class="filter-button">会计知识</a>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Python 3.14 发布，带来多项性能提升</h3>
+        <span class="card-source">Python 官方博客</span>
+      </div>
+      <div class="card-content">
+        Python 3.14 版本已正式发布，带来了多项性能提升和新特性，包括更快的执行速度、改进的内存管理和新的语言特性。本文详细介绍了这些变化及其对开发者的影响。
+      </div>
+      <div class="card-footer">
+        <div class="card-date">
+          <span>2026-03-24</span>
+        </div>
+        <a href="#" class="card-link">阅读全文 →</a>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">2026 年最值得学习的 AI 工具</h3>
+        <span class="card-source">AI 科技评论</span>
+      </div>
+      <div class="card-content">
+        随着 AI 技术的快速发展，2026 年出现了许多值得学习的 AI 工具。本文盘点了今年最受欢迎的 AI 工具，包括代码助手、图像生成、自然语言处理等领域的工具，并提供了学习资源和使用建议。
+      </div>
+      <div class="card-footer">
+        <div class="card-date">
+          <span>2026-03-23</span>
+        </div>
+        <a href="#" class="card-link">阅读全文 →</a>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">统计分析在商业决策中的应用</h3>
+        <span class="card-source">数据科学杂志</span>
+      </div>
+      <div class="card-content">
+        统计分析在现代商业决策中扮演着越来越重要的角色。本文探讨了如何使用统计方法分析市场数据、预测趋势和优化业务流程，帮助企业做出更明智的决策。
+      </div>
+      <div class="card-footer">
+        <div class="card-date">
+          <span>2026-03-22</span>
+        </div>
+        <a href="#" class="card-link">阅读全文 →</a>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">2026 年税法更新解读</h3>
+        <span class="card-source">财经资讯</span>
+      </div>
+      <div class="card-content">
+        2026 年税法有多项重要更新，本文详细解读了这些变化，包括个人所得税、企业所得税和增值税的调整，以及对纳税人的影响和应对策略。
+      </div>
+      <div class="card-footer">
+        <div class="card-date">
+          <span>2026-03-21</span>
+        </div>
+        <a href="#" class="card-link">阅读全文 →</a>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">JavaScript ES2026 新特性详解</h3>
+        <span class="card-source">前端开发博客</span>
+      </div>
+      <div class="card-content">
+        JavaScript ES2026 带来了多项新特性，包括改进的异步编程、更强大的类型系统和新的语法糖。本文详细介绍了这些新特性的使用方法和最佳实践。
+      </div>
+      <div class="card-footer">
+        <div class="card-date">
+          <span>2026-03-20</span>
+        </div>
+        <a href="#" class="card-link">阅读全文 →</a>
+      </div>
+    </div>
+    
+    <div class="pagination">
+      <a href="#" class="page-button">上一页</a>
+      <a href="#" class="page-button active">1</a>
+      <a href="#" class="page-button">2</a>
+      <a href="#" class="page-button">3</a>
+      <a href="#" class="page-button">下一页</a>
+    </div>
+    
+    <div class="rss-sources">
+      <h3 class="rss-sources-title">RSS 订阅源</h3>
+      <div class="sources-grid">
+        <div class="source-card">
+          <div class="source-name">Python 官方博客</div>
+          <a href="#" class="source-url">https://www.python.org/blogs/</a>
+          <div class="source-description">Python 官方发布的最新消息、版本更新和技术文章。</div>
+        </div>
+        <div class="source-card">
+          <div class="source-name">AI 科技评论</div>
+          <a href="#" class="source-url">https://ai-tech-review.com/rss</a>
+          <div class="source-description">关注 AI 领域的最新动态、技术突破和应用案例。</div>
+        </div>
+        <div class="source-card">
+          <div class="source-name">数据科学杂志</div>
+          <a href="#" class="source-url">https://datasciencemagazine.com/rss</a>
+          <div class="source-description">数据科学、统计分析和机器学习领域的专业文章。</div>
+        </div>
+        <div class="source-card">
+          <div class="source-name">财经资讯</div>
+          <a href="#" class="source-url">https://finance-news.com/rss</a>
+          <div class="source-description">最新的财经新闻、税法更新和财务分析。</div>
+        </div>
+        <div class="source-card">
+          <div class="source-name">前端开发博客</div>
+          <a href="#" class="source-url">https://frontend-dev.com/rss</a>
+          <div class="source-description">前端开发技术、框架更新和最佳实践。</div>
+        </div>
+        <div class="source-card">
+          <div class="source-name">统计学会期刊</div>
+          <a href="#" class="source-url">https://statistical-society.org/rss</a>
+          <div class="source-description">统计学领域的最新研究和应用案例。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

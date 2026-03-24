@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学习看板 | 知海导航</title>
+  <style>
+    :root {
+      --background: #070b12;
+      --foreground: #f4f7fb;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --primary-color: #81cfe0;
+      --success-color: #6ee7b7;
+      --warning-color: #fcd34d;
+      --danger-color: #f87171;
+      --violet-color: #c4b5fd;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #81cfe0;
+      margin-bottom: 8px;
+    }
+    
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 8px 0 12px 0;
+    }
+    
+    .description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #a1a1aa;
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    
+    .nav-link {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      transform: translateY(-2px);
+    }
+    
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    
+    .dashboard-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--violet-color);
+    }
+    
+    .user-stats {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--violet-color);
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: #a1a1aa;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--violet-color);
+    }
+    
+    .progress-section {
+      margin-bottom: 32px;
+    }
+    
+    .progress-item {
+      margin-bottom: 16px;
+    }
+    
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .progress-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .progress-percentage {
+      font-size: 14px;
+      color: var(--violet-color);
+      font-weight: 500;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: var(--violet-color);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    
+    .learning-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.2s ease;
+    }
+    
+    .learning-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(196, 181, 253, 0.4);
+    }
+    
+    .learning-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .learning-card-content {
+      font-size: 14px;
+      color: #a1a1aa;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    
+    .learning-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .learning-card-status {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: rgba(196, 181, 253, 0.1);
+      color: var(--violet-color);
+      border: 1px solid rgba(196, 181, 253, 0.2);
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .button-primary {
+      background: var(--violet-color);
+      color: var(--background);
+    }
+    
+    .button-primary:hover {
+      background: #a78bfa;
+    }
+    
+    .button-secondary {
+      background: rgba(196, 181, 253, 0.1);
+      color: var(--violet-color);
+      border: 1px solid rgba(196, 181, 253, 0.2);
+    }
+    
+    .button-secondary:hover {
+      background: rgba(196, 181, 253, 0.2);
+    }
+    
+    .recent-activities {
+      margin-top: 32px;
+    }
+    
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(196, 181, 253, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .activity-content {
+      flex: 1;
+    }
+    
+    .activity-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    
+    .activity-description {
+      font-size: 12px;
+      color: #a1a1aa;
+      margin-bottom: 8px;
+    }
+    
+    .activity-time {
+      font-size: 12px;
+      color: #71717a;
+    }
+    
+    @media (max-width: 768px) {
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      
+      .user-stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">KnowledgeHub</div>
+      <h1>知海导航</h1>
+      <p class="description">你的个人知识门户，聚焦编程、统计、AI 与财会。每一条资源都可搜索、可筛选、可持续维护。</p>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          首页
+        </a>
+        <a href="category/programming.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          💻 编程语言
+        </a>
+        <a href="category/statistics.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📊 统计分析
+        </a>
+        <a href="category/ai.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          🤖 AI 工具教程
+        </a>
+        <a href="category/accounting.html" class="nav-link" style="border: 1px solid rgba(129, 207, 224, 0.2); background: rgba(129, 207, 224, 0.1); color: #81cfe0;">
+          📒 会计知识教程
+        </a>
+        <a href="about.html" class="nav-link" style="border: 1px solid rgba(255, 255, 255, 0.2); color: #e4e4e7;">
+          关于本站
+        </a>
+      </div>
+    </header>
+    
+    <div class="dashboard-header">
+      <h2 class="dashboard-title">学习看板</h2>
+      <div class="user-stats">
+        <div class="stat-item">
+          <div class="stat-value">24</div>
+          <div class="stat-label">已学习资源</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">8</div>
+          <div class="stat-label">学习中资源</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">42</div>
+          <div class="stat-label">总学习时长</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">85%</div>
+          <div class="stat-label">完成率</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3 class="card-title">学习进度</h3>
+      <div class="progress-section">
+        <div class="progress-item">
+          <div class="progress-header">
+            <div class="progress-title">编程语言</div>
+            <div class="progress-percentage">75%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 75%;"></div>
+          </div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header">
+            <div class="progress-title">统计分析</div>
+            <div class="progress-percentage">60%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 60%;"></div>
+          </div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header">
+            <div class="progress-title">AI 工具教程</div>
+            <div class="progress-percentage">90%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 90%;"></div>
+          </div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header">
+            <div class="progress-title">会计知识教程</div>
+            <div class="progress-percentage">40%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 40%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="learning-grid">
+      <div class="learning-card">
+        <h3 class="learning-card-title">当前学习</h3>
+        <div class="learning-card-content">
+          <p>Python 数据分析入门教程</p>
+          <p>进度: 60%</p>
+          <p>预计完成时间: 2026-03-30</p>
+        </div>
+        <div class="learning-card-footer">
+          <span class="learning-card-status">进行中</span>
+          <a href="#" class="button button-primary">继续学习</a>
+        </div>
+      </div>
+      <div class="learning-card">
+        <h3 class="learning-card-title">学习计划</h3>
+        <div class="learning-card-content">
+          <p>JavaScript ES2026 新特性</p>
+          <p>开始时间: 2026-04-01</p>
+          <p>预计学习时长: 10 小时</p>
+        </div>
+        <div class="learning-card-footer">
+          <span class="learning-card-status">计划中</span>
+          <a href="#" class="button button-secondary">调整计划</a>
+        </div>
+      </div>
+      <div class="learning-card">
+        <h3 class="learning-card-title">推荐资源</h3>
+        <div class="learning-card-content">
+          <p>AI 大模型应用开发指南</p>
+          <p>难度: 中级</p>
+          <p>相关分类: AI 工具教程</p>
+        </div>
+        <div class="learning-card-footer">
+          <span class="learning-card-status">推荐</span>
+          <a href="#" class="button button-primary">开始学习</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3 class="card-title">最近活动</h3>
+      <div class="recent-activities">
+        <div class="activity-item">
+          <div class="activity-icon">📚</div>
+          <div class="activity-content">
+            <div class="activity-title">完成了 Python 基础教程</div>
+            <div class="activity-description">学习了 Python 的基本语法和数据类型</div>
+            <div class="activity-time">2026-03-24 14:30</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">📊</div>
+          <div class="activity-content">
+            <div class="activity-title">开始学习统计分析基础</div>
+            <div class="activity-description">开始学习描述统计和概率分布</div>
+            <div class="activity-time">2026-03-23 10:15</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">🤖</div>
+          <div class="activity-content">
+            <div class="activity-title">完成了 ChatGPT 应用指南</div>
+            <div class="activity-description">学习了如何有效使用 ChatGPT 进行对话和问题解决</div>
+            <div class="activity-time">2026-03-22 16:45</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">📒</div>
+          <div class="activity-content">
+            <div class="activity-title">开始学习基础会计原理</div>
+            <div class="activity-description">开始学习会计等式和借贷记账法</div>
+            <div class="activity-time">2026-03-21 09:30</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+[
+  {
+    "id": "py-beginner-official",
+    "title": "Python 官方教程",
+    "url": "https://docs.python.org/zh-cn/3/tutorial/",
+    "description": "Python 入门首选，语法讲解系统且权威。",
+    "category": "programming",
+    "subcategory": "python",
+    "stage": "beginner",
+    "scenario": "automation",
+    "tags": [
+      "Python",
+      "入门",
+      "官方文档"
+    ],
+    "icon": "https://www.python.org/static/favicon.ico",
+    "rating": "★★★★★",
+    "recommendedScore": 5,
+    "lastVerifiedAt": "2026-03-22",
+    "isFeatured": true
+  },
+  {
+    "id": "js-mdn-guide",
+    "title": "MDN JavaScript Guide",
+    "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide",
+    "description": "JavaScript 体系化教程，适合从入门到进阶。",
+    "category": "programming",
+    "subcategory": "javascript",
+    "stage": "intermediate",
+    "scenario": "web-development",
+    "tags": [
+      "JavaScript",
+      "Web",
+      "前端"
+    ],
+    "icon": "https://developer.mozilla.org/favicon-48x48.cbbd161b.png",
+    "rating": "★★★★☆",
+    "recommendedScore": 4,
+    "lastVerifiedAt": "2026-03-20",
+    "isFeatured": false
+  },
+  {
+    "id": "r-for-data-science",
+    "title": "R for Data Science",
+    "url": "https://r4ds.hadley.nz/",
+    "description": "R 数据分析经典教材，强调实践流程。",
+    "category": "programming",
+    "subcategory": "r",
+    "stage": "intermediate",
+    "scenario": "data-analysis",
+    "tags": [
+      "R",
+      "数据分析",
+      "教材"
+    ],
+    "icon": "https://www.r-project.org/favicon-32x32.png",
+    "rating": "★★★★★",
+    "recommendedScore": 5,
+    "lastVerifiedAt": "2026-03-19",
+    "isFeatured": true
+  },
+  {
+    "id": "python-automation-realpython",
+    "title": "Real Python Automation",
+    "url": "https://realpython.com/tutorials/automation/",
+    "description": "Python 自动化专题合集，面向实战项目。",
+    "category": "programming",
+    "subcategory": "python",
+    "stage": "advanced",
+    "scenario": "automation",
+    "tags": [
+      "Python",
+      "自动化",
+      "实战"
+    ],
+    "icon": "https://files.realpython.com/media/RP_Logo.5ac5c6b5f337.png",
+    "rating": "★★★★☆",
+    "recommendedScore": 4,
+    "lastVerifiedAt": "2026-03-18",
+    "isFeatured": false
+  },
+  {
+    "id": "statquest-youtube",
+    "title": "StatQuest 统计学习",
+    "url": "https://www.youtube.com/c/joshstarmer",
+    "description": "将统计与机器学习概念讲得极其清晰。",
+    "category": "statistics",
+    "subcategory": "theoretical-statistics",
+    "stage": "beginner",
+    "scenario": "data-analysis",
+    "tags": [
+      "统计学",
+      "贝叶斯",
+      "机器学习"
+    ],
+    "icon": "https://www.youtube.com/s/desktop/8f4f0f5f/img/favicon_32x32.png",
+    "rating": "★★★★★",
+    "recommendedScore": 5,
+    "lastVerifiedAt": "2026-03-22",
+    "isFeatured": true
+  },
+  {
+    "id": "openintro-statistics",
+    "title": "OpenIntro Statistics",
+    "url": "https://www.openintro.org/book/os/",
+    "description": "免费统计教材，覆盖概率与推断基础。",
+    "category": "statistics",
+    "subcategory": "theoretical-statistics",
+    "stage": "beginner",
+    "scenario": "data-analysis",
+    "tags": [
+      "概率",
+      "数理统计",
+      "教材"
+    ],
+    "icon": "https://www.openintro.org/assets/favicon-32x32.png",
+    "rating": "★★★★☆",
+    "recommendedScore": 4,
+    "lastVerifiedAt": "2026-03-17",
+    "isFeatured": false
+  },
+  {
+    "id": "python-statsmodels-docs",
+    "title": "statsmodels 官方文档",
+    "url": "https://www.statsmodels.org/stable/index.html",
+    "description": "Python 应用统计建模核心库，文档完善。",
+    "category": "statistics",
+    "subcategory": "applied-statistics",
+    "stage": "intermediate",
+    "scenario": "data-analysis",
+    "tags": [
+      "Python",
+      "应用统计",
+      "回归"
+    ],
+    "icon": "https://www.statsmodels.org/stable/_static/statsmodels-logo-v2-bw.svg",
+    "rating": "★★★★☆",
+    "recommendedScore": 4,
+    "lastVerifiedAt": "2026-03-21",
+    "isFeatured": true
+  },
+  {
+    "id": "r-bayes-book",
+    "title": "Bayesian Data Analysis 代码资源",
+    "url": "https://avehtari.github.io/BDA_R_demos/",
+    "description": "贝叶斯分析经典配套代码，R 实现导向。",
+    "category": "statistics",
+    "subcategory": "applied-statistics",
+    "stage": "advanced",
+    "scenario": "data-analysis",
+    "tags": [
+      "贝叶斯",
+      "R",
+      "建模"
+    ],
+    "icon": "https://avehtari.github.io/favicon.ico",
+    "rating": "★★★★★",
+    "recommendedScore": 5,
+    "lastVerifiedAt": "2026-03-16",
+    "isFeatured": false
+  },
+  {
+    "id": "cursor-docs",
+    "title": "Cursor 官方文档",
+    "url": "https://docs.cursor.com/",
+    "description": "AI 编程助手使用指南与团队实践。",
+    "category": "ai",
+    "subcategory": "ai-coding-assistant",
+    "stage": "beginner",
+    "scenario": "automation",
+    "tags": [
+      "Cursor",
+      "AI 编程",
+      "效率工具"
+    ],
+    "icon": "https://docs.cursor.com/favicon.ico",
+    "rating": "★★★★★",
+    "recommendedScore": 5,
+    "lastVerifiedAt": "2026-03-23",
+    "isFeatured": true
+  },
+  {
+    "id": "openai-guides",
+    "title": "OpenAI Developers",
+    "url": "https://platform.openai.com/docs",
+    "description": "大模型应用开发文档，包含提示词与 API 模式。",
+    "category": "ai",
+    "subcategory": "llm-applications",
+    "stage": "intermediate",
+    "scenario": "web-development",
+    "tags": [
+      "ChatGPT",
+      "LLM",
+      "API"
+    ],
+    "icon": "https://openai.com/favicon.ico",
+    "rating": "★★★★☆",
+    "recommendedScore": 4,
+    "lastVerifiedAt": "2026-03-23",
+    "isFeatured": false
+  },
+  {
+    "id": "anthropic-docs",
+    "title": "Anthropic Claude Docs",
+    "url": "https://docs.anthropic.com/",
+    "description": "Claude 开发文档，适合构建工作流和 Agent。",
+    "category": "ai",
+    "subcategory": "llm-applications",
+    "stage": "intermediate",
+    "scenario": "automation",
+    "tags": [
+      "Claude",
+      "Agent",
+      "提示工程"
+    ],
+    "icon": "https://docs.anthropic.com/favicon.ico",
+    "rating": "★★★★☆",
+    "recommendedScore": 4,
+    "lastVerifiedAt": "2026-03-22",
+    "isFeatured": true
+  },
+  {
+    "id": "runway-academy",
+    "title": "Runway Academy",
+    "url": "https://academy.runwayml.com/",
+    "description": "AI 视频创作课程，覆盖文生视频与后期。",
+    "category": "ai",
+    "subcategory": "ai-creative",
+    "stage": "beginner",
+    "scenario": "creative-production",
+    "tags": [
+      "AI 视频",
+      "创作",
+      "工具教程"
+    ],
+    "icon": "https://runwayml.com/favicon.ico",
+    "rating": "★★★★☆",
+    "recommendedScore": 4,
+    "lastVerifiedAt": "2026-03-15",
+    "isFeatured": false
+  },
+  {
+    "id": "cpa-official",
+    "title": "中国注册会计师协会",
+    "url": "https://www.cicpa.org.cn/",
+    "description": "CPA 考试政策、报名、公告权威入口。",
+    "category": "accounting",
+    "subcategory": "cpa",
+    "stage": "beginner",
+    "scenario": "exam-prep",
+    "tags": [
+      "CPA",
+      "考试公告",
+      "政策"
+    ],
+    "icon": "https://www.cicpa.org.cn/favicon.ico",
+    "rating": "★★★★★",
+    "recommendedScore": 5,
+    "lastVerifiedAt": "2026-03-23",
+    "isFeatured": true
+  },
+  {
+    "id": "gaodun-tax-law",
+    "title": "高顿税法学习中心",
+    "url": "https://www.gaodun.com/cpa/shuifa/",
+    "description": "税法科目课程与知识点梳理合集。",
+    "category": "accounting",
+    "subcategory": "tax-law",
+    "stage": "intermediate",
+    "scenario": "exam-prep",
+    "tags": [
+      "税法",
+      "CPA",
+      "课程"
+    ],
+    "icon": "https://www.gaodun.com/favicon.ico",
+    "rating": "★★★★☆",
+    "recommendedScore": 4,
+    "lastVerifiedAt": "2026-03-18",
+    "isFeatured": false
+  },
+  {
+    "id": "sec-edgar",
+    "title": "SEC EDGAR 公司公告",
+    "url": "https://www.sec.gov/edgar/search/",
+    "description": "美国上市公司披露与财务公告检索。",
+    "category": "accounting",
+    "subcategory": "finance-news",
+    "stage": "advanced",
+    "scenario": "industry-tracking",
+    "tags": [
+      "SEC",
+      "财经资讯",
+      "公告"
+    ],
+    "icon": "https://www.sec.gov/themes/custom/uswds_sec/favicon.ico",
+    "rating": "★★★★☆",
+    "recommendedScore": 4,
+    "lastVerifiedAt": "2026-03-20",
+    "isFeatured": true
+  },
+  {
+    "id": "chinatax-updates",
+    "title": "国家税务总局政策发布",
+    "url": "https://www.chinatax.gov.cn/chinatax/n810341/index.html",
+    "description": "税法更新与征管通知官方来源。",
+    "category": "accounting",
+    "subcategory": "tax-law",
+    "stage": "intermediate",
+    "scenario": "industry-tracking",
+    "tags": [
+      "税法更新",
+      "政策",
+      "财税资讯"
+    ],
+    "icon": "https://www.chinatax.gov.cn/favicon.ico",
+    "rating": "★★★★★",
+    "recommendedScore": 5,
+    "lastVerifiedAt": "2026-03-21",
+    "isFeatured": true
+  }
+]
